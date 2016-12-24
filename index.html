@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" />
+    <link href="https://fonts.googleapis.com/css?family=Ceviche+One|Lobster|Oxigen|Bungee|Exo|Rajdhani|Quicksand|Orbitron|Abel|Dosis|Open+Sans+Condensed:300|PT+Sans|PT+Sans+Narrow" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <title>Welcome</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="container">
+            <div class="col-sm-12 text-center margin-top-20 margin-bottom-20">
+                <a id="pagename" href="/" class="label label-title"></a> <a href="?categ=audio&subcateg=music" class="label label-primary">Music</a> <a href="?categ=video&subcateg=hd___movies" class="label label-primary">HD</a> <a href="?categ=video&subcateg=movies" class="label label-primary">Movies</a>                <a href="?categ=video&subcateg=tv_shows" class="label label-primary">tv</a> <a href="?categ=video&subcateg=3d" class="label label-primary">3D</a>
+                <a href="?categ=games&subcateg=pc" class="label label-success">PC</a> <a href="?categ=games&subcateg=psx" class="label label-success">PSX</a> <a href="?categ=games&subcateg=xbox360" class="label label-success">XBOX</a> <a href="?categ=games&subcateg=wii"
+                    class="label label-success">Wii</a> <a href="?categ=games&subcateg=android" class="label label-success">Android</a>
+                <a href="?categ=applications&subcateg=windows" class="label label-info">Windows</a> <a href="?categ=applications&subcateg=mac" class="label label-info">Mac</a> <a href="?categ=audio&subcateg=flac" class="label label-info">flac</a> <a href="?categ=other&subcateg=comics"
+                    class="label label-info">comics</a> <a href="?categ=other&subcateg=e_books" class="label label-info">e-books</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center margin-top-50">
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+        <div class="container">
+            <form method="GET" action="/">
+                <div class="input-group">
+                    <input style="font-size: 20px;" id="maininput" type="text" name="query" class="form-control m-b" placeholder="Search for..." value="">
+                    <span class="input-group-btn">
+                <button type="submit" class="btn btn-default m-b" type="button">Search</button>
+            </span>
+                </div>
+            </form>
+        </div>
+
+        <div class="container margin-top-20 margin-bottom-20">
+            <div class="row">
+                <div class="col-sm-12 text-center" style="font-size: 90%;">
+                    <b> <a href="https://twitter.com/torrent_tips">@torrent_tips</a>:
+                    <div style="display: inline;" id="tips"></div></b>
+
+                </div>
+            </div>
+        </div>
+        <div class="block p-t p-b">
+            <div id="maincontainer" class="container">
+                <div id="alert"></div>
+                <h3>
+                    <p id="resultsfor">
+                        <p> <i id="spinner" class="fa fa-spinner fa-pulse fa-1x fa-fw"></i> <span id="resultsnumber" class="small"></span> </h3>
+                <div id="result-table" style="display: none;">
+
+                    <div class="row">
+                        <div class="col-sm-8 col-md-9 col-lg-10">
+                            <div>
+                                <a href="#" class="sort" data-sort="name"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-3 col-lg-2">
+                            <div class="row">
+                                <div class="col-xs-6 text-right">
+                                    <a href="#" class="btn btn-xs ">size</a>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <a href="#" class="btn btn-xs ">peers</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="result-template" style="display: none;">
+                        <div class="result" data-name="NAME" data-added="1480171186" data-size="442888889" data-seeders="3" data-leechers="1">
+                            <div class="row">
+                                <div class="col-sm-8 col-md-9 col-lg-10">
+                                    <a style="font-size:17px; font-family: 'Abel', sans-serif;" href="magnet:MAGNET">NAME</a>
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseHASH" aria-controls="collapseHASH"><span class="fa fa-chevron-down"></span></a>
+                                </div>
+                                <div class="col-sm-4 col-md-3 col-lg-2">
+                                    <div class="row">
+                                        <div class="col-xs-6 text-right">
+                                            <span class="btn btn-xs btn-noclick font12">
+                                                            SIZEMB
+                                                        </span>
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <span class="btn btn-xs btn-noclick font17">
+                                                        PEERS
+                                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="collapseHASH" class="collapse row" role="tabpanel">
+                                <div class="col-sm-12">
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item" id="descriptionHASH">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="results">
+                    </div>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3">
+                            <a id="buttonprevious" style="display:none;" href="#" onclick="pageback()" class="btn btn-primary btn-block btn-sm">Previous</a>
+                        </div>
+                        <div class="col-xs-6 col-sm-offset-6 col-sm-3 margin-bottom-50">
+                            <a id="buttonnext" style="display:none;" href="#" onclick="pagenext()" class="btn btn-primary btn-block btn-sm">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="/assets/js/lib/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/assets/js/lib/bootstrap/toolkit.min.js"></script>
+        <script type="text/javascript" src="/assets/js/lib/moment/moment.min.js"></script>
+        <script type="text/javascript" src="/assets/js/lib/async.js"></script>
+        <script type="text/javascript" src="/assets/js/index.js?version=1.2"></script>
+        <script type="text/javascript" src="/assets/js/lib/twitter.min.js"></script>
+        <script>
+            var config8 = {
+                "profile": {
+                    "screenName": 'torrent_tips'
+                },
+                "dataOnly": true,
+                "maxTweets": 1,
+                "customCallback": populateTpl
+            };
+
+            twitterFetcher.fetch(config8);
+
+            function populateTpl(tweets) {
+                $('#tips').html(tweets[0].tweet)
+                console.log(tweets)
+            }
+        </script>
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-89366798-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+</body>
+
+</html>
