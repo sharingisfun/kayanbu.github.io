@@ -177,21 +177,56 @@ var template = $('#result-template').html()
 var render = function(metadata) {
   var template = $('#result-template').html()
   template = template.replace(/NAME/g, metadata.title)
+  template = template.replace(/UPLOADER/g, metadata.uploader)
   template = template.replace(/SIZEMB/g, prettysize(metadata.size))
   if (metadata.peers) {
     template = template.replace(/PEERS/g, (metadata.peers))
   } else {
     template = template.replace(/PEERS/g, (metadata.seeders) + (metadata.leechers))
   }
+
+  if (metadata.previous) {
+    if (metadata.previous > metadata.peers) {
+      template = template.replace(/UPDOWN/g, 'caret-down')
+    } else {
+      template = template.replace(/UPDOWN/g, 'caret-up')
+    }
+
+    // if (metadata.previous == metadata.peers) {
+    //   console.log('equal here')
+    //   template = template.replace(/SMALLERFONT/g, 'smallerfont')
+    //   template = template.replace(/UPDOWN/g, 'circle')
+    // } else {
+    //   template = template.replace(/SMALLERFONT/g, '')
+    //     // template = template.replace(/EQUAL/g, '')
+    // }
+  } 
+  // else {
+  //   // template = template.replace(/EQUAL/g, '')
+  //   template = template.replace(/SMALLERFONT/g, 'smallerfont')
+  //   template = template.replace(/UPDOWN/g, 'circle')
+  // }
+  // template = template.replace(/SMALLERFONT/g, 'smallerfont')
+
+
   template = template.replace(/MAGNET/g, (metadata.magnet))
   if (metadata.torrent != undefined) {
-    console.log(metadata)
+    // console.log(metadata)
     template = template.replace(/HASH/g, (metadata.torrent.infoHash))
   } else {
     template = template.replace(/HASH/g, (metadata.parsed.infoHash))
   }
   return template
 }
+
+var render_badge = function(type, color) {
+  // console.log('<render_badge>', type, color)
+  var template = $('#badge-template').html()
+  template = template.replace(/TYPE/g, type)
+  template = template.replace(/COLOR/g, color)
+  return template
+}
+
 var result_count = 0
 document.hashtotal = 0
 var get_categ_data = function(a, b, category, sub_category, callback) {
@@ -409,6 +444,7 @@ var page_end = 100 * page
 var showing_count = 0
 
 document.seeders_count = []
+var content_types = { 'mp4': 'yellow', 'mkv': 'orange', 'mp3': 'blue', 'flac': 'blueish', 'm4a': 'blueish2', 'x265': 'x264', 'x264': 'x264', 'aac': 'aac' }
 var get_metadata = function(i, hash, addto, each_category) {
   // console.log('<get_metadata>', i, hash, addto)
   $.getJSON('https://part-' + i + '.metadata-cache.com/metadata/' + hash + '.json', function(metadata) {
@@ -419,13 +455,27 @@ var get_metadata = function(i, hash, addto, each_category) {
 
     $(addto).append(render(metadata));
 
-
+    var infoHash
+    if (metadata.torrent != undefined) {
+      infoHash = metadata.torrent.infoHash
+    } else {
+      infoHash = metadata.parsed.infoHash
+    }
+    $('#description' + infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
+    Object.keys(content_types).forEach(function(each_key) {
+      // console.log('each_key', each_key)
+      if (metadata.title.toLowerCase().indexOf(each_key) > -1 || metadata.description.toLowerCase().indexOf(each_key) > -1) {
+        // console.log('#line' + infoHash)
+        $('#line' + infoHash).append(render_badge(each_key.toUpperCase(), content_types[each_key]))
+      }
+    })
 
     if (metadata.torrent != undefined) {
       $('#description' + metadata.torrent.infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
     } else {
       $('#description' + metadata.parsed.infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
     }
+
 
     function unescapeHtml(safe) {
       return $('<div />').html(safe).text();

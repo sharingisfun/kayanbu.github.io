@@ -213,4 +213,70 @@ body.dark .label-danger {
     color: black;
 }
 
-​
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.orange {
+    background-color: #ff9f0f;
+}
+
+.yellow {
+    background-color: #ffc00f;
+}
+
+.blue {
+    background-color: #5bc0de;
+}
+
+.blueish {
+    background-color: #539dd2;
+}
+
+.blueish2 {
+    background-color: #5b9bde;
+}
+
+.aac {
+    background-color: #3390d2;
+}
+
+.x264 {
+    background-color: #337ab7;
+}
+
+.margin5right {
+    margin-right: 5px;
+}
+
+.fa-caret-up {
+    color: rgba(0, 255, 0, 0.5);
+}
+
+.fa-caret-down {
+    color: rgba(255, 0, 0, 0.5);
+}
+
+.fa-caret-equal {
+    color: grey;
+}
+
+.fa-circle {
+    font-size: 9px;
+    color: grey;
+}
+
+.smallerfont {
+    font-size: 9px;
+}
