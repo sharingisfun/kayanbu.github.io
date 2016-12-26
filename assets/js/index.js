@@ -8,7 +8,7 @@ var inTwoWeeks = new Date();
 inTwoWeeks.setDate(inTwoWeeks.getDate() + 14);
 
 if (document.cookie.indexOf('SafeStatus') == -1) {
-  document.cookie = 'SafeStatus=SafeModeOn;expires=' + inTwoWeeks
+  document.cookie = 'SafeStatus=SafeModeOn'
 } else {
   if (document.cookie.indexOf('SafeModeOff') > -1) {
     safemode = false
@@ -24,11 +24,11 @@ console.log('safemode', safemode)
 var switchSafeMode = function(e) {
   // e.preventDefault();
   if (document.cookie.indexOf('SafeModeOn') > -1) {
-    document.cookie = 'SafeStatus=SafeModeOff;expires=' + inTwoWeeks
+    document.cookie = 'SafeStatus=SafeModeOff'
     location.reload()
 
   } else {
-    document.cookie = 'SafeStatus=SafeModeOn;expires=' + inTwoWeeks
+    document.cookie = 'SafeStatus=SafeModeOn'
     location.reload()
 
   }
