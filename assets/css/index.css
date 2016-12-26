@@ -280,3 +280,7 @@ body.dark .label-danger {
 .smallerfont {
     font-size: 9px;
 }
+
+.label {
+    padding-top: 4px;
+}

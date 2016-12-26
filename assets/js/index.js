@@ -2,6 +2,37 @@ var sizes = [
   'Bytes', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB'
 ];
 clean = ['{', '}', '+', '_', '*', '-', '.', '/', '(', ')', '[', ']', '\'', ',', '&', '~', '!', '@', ':', ';', '%', '?', '¿', '!', '¡', '$', '%', '^', '\\', '|', '<', '>', '`']
+var safemode = true
+
+var inTwoWeeks = new Date();
+inTwoWeeks.setDate(inTwoWeeks.getDate() + 14);
+
+if (document.cookie.indexOf('SafeStatus') == -1) {
+  document.cookie = 'SafeStatus=SafeModeOn;expires=' + inTwoWeeks
+} else {
+  if (document.cookie.indexOf('SafeModeOff') > -1) {
+    safemode = false
+    document.getElementById('safemode').text = "Safe mode OFF"
+    document.getElementById('porn1').style.display = ""
+  }
+}
+
+console.log('safemode', safemode)
+
+
+
+var switchSafeMode = function(e) {
+  // e.preventDefault();
+  if (document.cookie.indexOf('SafeModeOn') > -1) {
+    document.cookie = 'SafeStatus=SafeModeOff;expires=' + inTwoWeeks
+    location.reload()
+
+  } else {
+    document.cookie = 'SafeStatus=SafeModeOn;expires=' + inTwoWeeks
+    location.reload()
+
+  }
+}
 
 var subcategories = {
   'hd___movies': 'HD Movies',
@@ -200,7 +231,7 @@ var render = function(metadata) {
     //   template = template.replace(/SMALLERFONT/g, '')
     //     // template = template.replace(/EQUAL/g, '')
     // }
-  } 
+  }
   // else {
   //   // template = template.replace(/EQUAL/g, '')
   //   template = template.replace(/SMALLERFONT/g, 'smallerfont')
@@ -310,6 +341,12 @@ if (document.request['query'] != undefined) {
     document.words = separate_by(document.words, remove_symbol)
   })
 
+  for (var i = document.words.length - 1; i >= 0; i--) {
+    if (document.words[i] === "the") {
+      document.words.splice(i, 1);
+    }
+  }
+
   if (document.words.length > 3) {
     comment = " (Max 3 words allowed)"
     document.words = document.words.slice(0, 3)
@@ -383,7 +420,7 @@ if (document.request['query'] != undefined) {
     $.getJSON('https://part-0.metadata-cache.com/categories.json', function(categories) {
       // console.log(categories)
       Object.keys(categories).forEach(function(each_category) {
-        if (each_category.indexOf('porn') != 0) {
+        if (each_category.indexOf('porn') != 0 || safemode == false) {
           $('#results').append('<div class="categ" style="display:none;" id="categ' + each_category + '">' + '</div>')
           Object.keys(categories[each_category]).forEach(function(each_sub_category) {
             if (categories[each_category][each_sub_category] > 100) {
@@ -448,61 +485,62 @@ var content_types = { 'mp4': 'yellow', 'mkv': 'orange', 'mp3': 'blue', 'flac': '
 var get_metadata = function(i, hash, addto, each_category) {
   // console.log('<get_metadata>', i, hash, addto)
   $.getJSON('https://part-' + i + '.metadata-cache.com/metadata/' + hash + '.json', function(metadata) {
-    $("#result-table").show()
+    // console.log('metadata', metadata)
+    if (metadata.categoryP.toLowerCase().indexOf('porn') == -1 || safemode == false) {
+      $("#result-table").show()
 
+      showing_count = showing_count + 1
 
-    showing_count = showing_count + 1
+      $(addto).append(render(metadata));
 
-    $(addto).append(render(metadata));
-
-    var infoHash
-    if (metadata.torrent != undefined) {
-      infoHash = metadata.torrent.infoHash
-    } else {
-      infoHash = metadata.parsed.infoHash
-    }
-    $('#description' + infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
-    Object.keys(content_types).forEach(function(each_key) {
-      // console.log('each_key', each_key)
-      if (metadata.title.toLowerCase().indexOf(each_key) > -1 || metadata.description.toLowerCase().indexOf(each_key) > -1) {
-        // console.log('#line' + infoHash)
-        $('#line' + infoHash).append(render_badge(each_key.toUpperCase(), content_types[each_key]))
+      var infoHash
+      if (metadata.torrent != undefined) {
+        infoHash = metadata.torrent.infoHash
+      } else {
+        infoHash = metadata.parsed.infoHash
       }
-    })
+      $('#description' + infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
+      Object.keys(content_types).forEach(function(each_key) {
+        // console.log('each_key', each_key)
+        if (metadata.title.toLowerCase().indexOf(each_key) > -1 || metadata.description.toLowerCase().indexOf(each_key) > -1) {
+          // console.log('#line' + infoHash)
+          $('#line' + infoHash).append(render_badge(each_key.toUpperCase(), content_types[each_key]))
+        }
+      })
 
-    if (metadata.torrent != undefined) {
-      $('#description' + metadata.torrent.infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
-    } else {
-      $('#description' + metadata.parsed.infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
+      if (metadata.torrent != undefined) {
+        $('#description' + metadata.torrent.infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
+      } else {
+        $('#description' + metadata.parsed.infoHash).html(unescape(metadata.description.replace(/\n/g, '</br>')))
+      }
+
+
+      function unescapeHtml(safe) {
+        return $('<div />').html(safe).text();
+      }
+
+      if (document.words || document.request['categ'] != undefined) {
+        $('#resultsnumber').text(' (showing ' + page_start + '-' + (page_start + 1 + result_count) + ' of ' + (document.hashtotal) + ')')
+      } else {
+        $('#resultsnumber').hide()
+      }
+
+      if (document.hashtotal > page_start + 100) {
+        $('#buttonnext').show()
+      }
+      if (page_start > 0) {
+        $('#buttonprevious').show()
+      }
+
+      result_count = result_count + 1
+
+      // console.log('page_end: ', page_end, 'page_start:', page_start)
+      if ((page_end - page_start) == (result_count)) {}
+      if (each_category != undefined) {
+        var fatherdiv = '#categ' + each_category
+        $(fatherdiv).show()
+      }
     }
-
-
-    function unescapeHtml(safe) {
-      return $('<div />').html(safe).text();
-    }
-
-    if (document.words || document.request['categ'] != undefined) {
-      $('#resultsnumber').text(' (showing ' + page_start + '-' + (page_start + 1 + result_count) + ' of ' + (document.hashtotal) + ')')
-    } else {
-      $('#resultsnumber').hide()
-    }
-
-    if (document.hashtotal > page_start + 100) {
-      $('#buttonnext').show()
-    }
-    if (page_start > 0) {
-      $('#buttonprevious').show()
-    }
-
-    result_count = result_count + 1
-
-    // console.log('page_end: ', page_end, 'page_start:', page_start)
-    if ((page_end - page_start) == (result_count)) {}
-    if (each_category != undefined) {
-      var fatherdiv = '#categ' + each_category
-      $(fatherdiv).show()
-    }
-
   })
 }
 
