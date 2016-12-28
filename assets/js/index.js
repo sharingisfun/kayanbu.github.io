@@ -69,7 +69,6 @@ var subcategories = {
   'porn': 'Porn',
   'pictures': 'Pictures',
   'games': 'Games'
-
 }
 
 var separate_by = function(words, symbol) {
@@ -138,7 +137,11 @@ document.findword = function(info, callback) {
 
       showing_data.forEach(function(info) {
         count_showed = count_showed + 1
-          // console.log('count_showed', info)
+        $('#resultsnumber').text(' (showing ' + page_start + '-' + (document.hashtotal) + ' of ' + (count_showed) + ')')
+        if (count_showed / 100 > 1) {
+          generate_pagination(parseInt(count_showed / 100))
+        }
+        // console.log('count_showed', info)
         if (count_showed >= page_start && count_showed < page_end) {
           get_metadata(info.page, info.hash, '#results')
         }
@@ -161,16 +164,20 @@ document.findword = function(info, callback) {
 }
 
 
+
 var url_attributes = window.location.search.replace('?', '').split('&')
 var domain_name = window.location.hostname.replace('localhost', 'KAYANBU').replace('.com', '').replace('www.', '').replace('.github.io', '').toUpperCase()
 $('#pagename').text(domain_name)
 document.title = domain_name;
 document.request = {}
 url_attributes.forEach(function(attribute) {
-    var got = attribute.split('=')
-    document.request[got[0]] = got[1]
-  })
-  // console.log(document.request)
+  var got = attribute.split('=')
+  document.request[got[0]] = got[1]
+})
+if (document.request['page'] == undefined) {
+  document.request['page'] = 1
+}
+// console.log(document.request)
 
 var prettysize = function(size, nospace, one) {
   var mysize, f;
@@ -274,7 +281,9 @@ var get_categ_data = function(a, b, category, sub_category, callback) {
       result = result.slice(0, 100)
       result.forEach(function(info) {
           count_showed = count_showed + 1
-
+          if (count_showed / 100 > 1) {
+            generate_pagination(parseInt(count_showed / 100))
+          }
           // console.log('count_showed', count_showed, page_start, page_end)
           if (count_showed >= page_start && count_showed < page_end) {
             get_metadata(a, info, div)
@@ -300,8 +309,8 @@ var get_categ_data = function(a, b, category, sub_category, callback) {
 var add_categ_to_div = function(category, sub_category) {
 
   var categs_requests = []
-  for (var b = 0; b < 10; b++) {
-    for (var a = 0; a < 10; a++) {
+  for (var a = 0; a < 10; a++) {
+    for (var b = 0; b < 10; b++) {
 
       categs_requests.push({ 'a': a, 'b': b, 'category': category, 'sub_category': sub_category })
         // get_categ_data(a, b, category, sub_category)
@@ -360,7 +369,7 @@ if (document.request['query'] != undefined) {
   })
 
   // pages page
-  for (var i = 0; i < 37; i++) {
+  for (var i = 0; i < 90; i++) {
     document.words.forEach(function(word) {
       urls.push({ page: i, word: word })
     })
@@ -438,6 +447,37 @@ if (document.request['query'] != undefined) {
 
 }
 
+var last_pagination_max = undefined
+generate_pagination = function(num) {
+  var paginator = document.getElementById('paginator')
+  var min, max
+  if (document.request['page'] == undefined || parseInt(document.request['page']) < 7) {
+    min = 1
+    max = 13
+  } else {
+    min = parseInt(document.request['page']) - 6
+    max = parseInt(document.request['page']) + 6
+  }
+  if (parseInt(num) < max) {
+    max = parseInt(num) + 2
+  }
+  if (last_pagination_max != max) {
+    $('#paginator').html("")
+    for (var i = min; i < max; i++) {
+      var page_button_template = '<div class="col-sm-1 nopaddingright"><a id="buttonprevious" href="#" onclick="changepage(PAGENUM)" class="btn BTNPRIMARY btn-block btn-sm">PAGENUM</a></div>'
+      page_button_template = page_button_template.replace(/PAGENUM/g, i)
+      console.log('dd', document.request['page'], last_pagination_max)
+      last_pagination_max = max
+      if (parseInt(document.request['page']) != i) {
+        page_button_template = page_button_template.replace("BTNPRIMARY", "btn-primary")
+      } else {
+        page_button_template = page_button_template.replace("BTNPRIMARY", "")
+      }
+      $('#paginator').append(page_button_template)
+    }
+  }
+
+}
 
 
 function shuffle(array) {
@@ -551,6 +591,18 @@ document.hashesadded = []
 var data_showed = false
 
 
+var changepage = function(n) {
+  var result = []
+  document.request['page'] = n
+  if (document.request['page'] < 1) {
+    document.request['page'] = 1
+  }
+  Object.keys(document.request).forEach(function(each_one) {
+    result.push(each_one + "=" + document.request[each_one])
+    console.log(result)
+  })
+  window.location.href = '?' + result.join('&');
+}
 
 var pageback = function() {
   console.log('one page back')

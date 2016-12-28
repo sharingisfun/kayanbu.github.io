@@ -284,3 +284,8 @@ body.dark .label-danger {
 .label {
     padding-top: 4px;
 }
+
+.nopaddingright {
+    padding-right: 0px;
+    width: "";
+}
