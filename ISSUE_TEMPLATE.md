@@ -1,6 +1,6 @@
 {
 
-"title": "NAME OF THE TORRENT",
+"title": "TITLE OF THE CONTENT",
 
 "categoryP": "Main category, choose one from [category.json](https://part-0.metadata-cache.com/categories.json)",
 
