@@ -70,7 +70,6 @@ var subcategories = {
   'games': 'Games'
 }
 
-$('#resultsnumber').text(' (showing random healthy magnets)')
 console.log('random healthy...')
 
 var separate_by = function(words, symbol) {
@@ -412,6 +411,8 @@ if (document.request['query'] != undefined) {
 
 
 } else {
+  $('#resultsnumber').text(' (showing random healthy magnets)')
+  
   setTimeout(function() {
     $('#spinner').hide()
       // console.log('HIDE SPINNER!')
