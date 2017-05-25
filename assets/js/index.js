@@ -20,7 +20,6 @@ if (document.cookie.indexOf('SafeStatus') == -1) {
 console.log('safemode', safemode)
 
 
-
 var switchSafeMode = function(e) {
   // e.preventDefault();
   if (document.cookie.indexOf('SafeModeOn') > -1) {
@@ -70,6 +69,9 @@ var subcategories = {
   'pictures': 'Pictures',
   'games': 'Games'
 }
+
+$('#resultsnumber').text(' (showing random healthy magnets)')
+console.log('random healthy...')
 
 var separate_by = function(words, symbol) {
   var final_words = []
@@ -562,7 +564,7 @@ var get_metadata = function(i, hash, addto, each_category) {
       if (document.words || document.request['categ'] != undefined) {
         $('#resultsnumber').text(' (showing ' + page_start + '-' + (page_start + 1 + result_count) + ' of ' + (document.hashtotal) + ')')
       } else {
-        $('#resultsnumber').hide()
+        // $('#resultsnumber').hide()
       }
 
       if (document.hashtotal > page_start + 100) {
