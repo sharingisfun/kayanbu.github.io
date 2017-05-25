@@ -12,6 +12,7 @@ h1.block-title {
     font-size: 2em;
 }
 
+
 @media (min-width: 992px) {
     .h1.block-title,
     h1.block-title {
@@ -288,4 +289,9 @@ body.dark .label-danger {
 .nopaddingright {
     padding-right: 0px;
     width: "";
+}
+
+.centerbutton {
+    padding-left: 30%;
+    padding-right: 17px;
 }

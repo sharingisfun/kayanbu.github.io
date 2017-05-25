@@ -94,7 +94,7 @@ var separate_by = function(words, symbol) {
 var urls = []
 
 document.findword = function(info, callback) {
-  $.getJSON('https://part-' + info.page + '.metadata-cache.com/search/' + info.word + '.json', function(data) {
+  $.getJSON('https://' + info.page + '.metadata-cache.com/search/' + info.word + '.json', function(data) {
       if (document.hashtotal == undefined) {
         document.hashtotal = 0
       }
@@ -288,7 +288,7 @@ var get_categ_data = function(a, b, category, sub_category, callback) {
           }
           // console.log('count_showed', count_showed, page_start, page_end)
           if (count_showed >= page_start && count_showed < page_end) {
-            get_metadata(a, info, div)
+            get_metadata('part-'+a, info, div)
           }
         })
         // result.forEach(function(each_hash) {
@@ -370,10 +370,16 @@ if (document.request['query'] != undefined) {
     return word.length > 1
   })
 
+  // updated pages
+  for (var i = 0; i < 1; i++) {
+    document.words.forEach(function(word) {
+      urls.push({ page: 'new-'+i, word: word })
+    })
+  }
   // pages page
   for (var i = 0; i < 90; i++) {
     document.words.forEach(function(word) {
-      urls.push({ page: i, word: word })
+      urls.push({ page: 'part-'+i, word: word })
     })
   }
 
@@ -452,6 +458,7 @@ if (document.request['query'] != undefined) {
 var last_pagination_max = undefined
 generate_pagination = function(num) {
   var paginator = document.getElementById('paginator')
+  var toppaginator = document.getElementById('toppaginator')
   var min, max
   if (document.request['page'] == undefined || parseInt(document.request['page']) < 7) {
     min = 1
@@ -465,8 +472,9 @@ generate_pagination = function(num) {
   }
   if (last_pagination_max != max) {
     $('#paginator').html("")
+    $('#toppaginator').html("")
     for (var i = min; i < max; i++) {
-      var page_button_template = '<div class="col-sm-1 nopaddingright"><a id="buttonprevious" href="#" onclick="changepage(PAGENUM)" class="btn BTNPRIMARY btn-block btn-sm">PAGENUM</a></div>'
+      var page_button_template = '<div class="col-sm-1 nopaddingright "><a href="#" onclick="changepage(PAGENUM)" class="btn BTNPRIMARY btn-block btn-sm centerbutton">PAGENUM</a></div>'
       page_button_template = page_button_template.replace(/PAGENUM/g, i)
       console.log('dd', document.request['page'], last_pagination_max)
       last_pagination_max = max
@@ -476,6 +484,7 @@ generate_pagination = function(num) {
         page_button_template = page_button_template.replace("BTNPRIMARY", "")
       }
       $('#paginator').append(page_button_template)
+      $('#toppaginator').append(page_button_template)
     }
   }
 
@@ -511,7 +520,7 @@ var add_results_to_div = function(each_category, each_sub_category) {
     result = shuffle(result)
     result = result.slice(0, 10)
     result.forEach(function(each_hash) {
-        get_metadata(0, each_hash, div, each_category)
+        get_metadata('part-'+0, each_hash, div, each_category)
       })
       // result()
   })
@@ -526,7 +535,7 @@ document.seeders_count = []
 var content_types = { 'mp4': 'yellow', 'mkv': 'orange', 'mp3': 'blue', 'flac': 'blueish', 'm4a': 'blueish2', 'x265': 'x264', 'x264': 'x264', 'aac': 'aac' }
 var get_metadata = function(i, hash, addto, each_category) {
   // console.log('<get_metadata>', i, hash, addto)
-  $.getJSON('https://part-' + i + '.metadata-cache.com/metadata/' + hash + '.json', function(metadata) {
+  $.getJSON('https://' + i + '.metadata-cache.com/metadata/' + hash + '.json', function(metadata) {
     // console.log('metadata', metadata)
     if (metadata.categoryP.toLowerCase().indexOf('porn') == -1 || safemode == false) {
       $("#result-table").show()
@@ -569,9 +578,11 @@ var get_metadata = function(i, hash, addto, each_category) {
 
       if (document.hashtotal > page_start + 100) {
         $('#buttonnext').show()
+        $('#topbuttonnext').show()
       }
       if (page_start > 0) {
         $('#buttonprevious').show()
+        $('#topbuttonprevious').show()
       }
 
       result_count = result_count + 1

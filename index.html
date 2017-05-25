@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/index.css?version=0.2" />
     <link href="https://fonts.googleapis.com/css?family=Ceviche+One|Lobster|Oxigen|Bungee|Exo|Rajdhani|Quicksand|Orbitron|Abel|Dosis|Open+Sans+Condensed:300|PT+Sans|PT+Sans+Narrow" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="/assets/images/kopimi.ico" />
     <title>Welcome</title>
 </head>
 
@@ -60,7 +61,18 @@
                     <p id="resultsfor">
                         <p> <i id="spinner" class="fa fa-spinner fa-pulse fa-1x fa-fw"></i> <span id="resultsnumber" class="small"></span> </h3>
                 <div id="result-table" style="display: none;">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3">
+                            <a id="topbuttonprevious" style="display:none;" href="#" onclick="pageback()" class="btn btn-primary btn-block btn-sm">Previous</a>
+                        </div>
+                        <div id="toppaginator" class="hidden-xs col-sm-6 ">
+                        </div>
 
+                        <!--<div class="col-xs-6 col-sm-offset-6 col-sm-3 margin-bottom-50">-->
+                        <div class="col-xs-6 col-sm-3 margin-bottom-50">
+                            <a id="topbuttonnext" style="display:none;" href="#" onclick="pagenext()" class="btn btn-primary btn-block btn-sm">Next</a>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-8 col-md-9 col-lg-10">
                             <div>
@@ -127,7 +139,6 @@
                             <a id="buttonprevious" style="display:none;" href="#" onclick="pageback()" class="btn btn-primary btn-block btn-sm">Previous</a>
                         </div>
                         <div id="paginator" class="hidden-xs col-sm-6 ">
-
                         </div>
 
                         <!--<div class="col-xs-6 col-sm-offset-6 col-sm-3 margin-bottom-50">-->
