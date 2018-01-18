@@ -160,7 +160,7 @@ document.findword = function(info, callback) {
     })
     .always(function() {
       callback(document.alldata)
-        // console.log("complete", metadata_domain+'/part-' + info.page + '/search/' + info.word + '.json');
+        // console.log("complete", metadata_domain+'/part-' + info.page + '/master/search/' + info.word + '.json');
     });
 
 }
@@ -252,7 +252,7 @@ var render = function(metadata) {
   template = template.replace(/MAGNET/g, (metadata.magnet))
   if (metadata.torrent != undefined) {
     // console.log(metadata)
-    template = template.replace(/HASH/g, (metadata.torrent.infoHash))
+    template = template.replace(/HASH/g, (metadata.torrent.infoHash))f
   } else {
     template = template.replace(/HASH/g, (metadata.parsed.infoHash))
   }
@@ -270,7 +270,7 @@ var render_badge = function(type, color) {
 var result_count = 0
 document.hashtotal = 0
 var get_categ_data = function(a, b, category, sub_category, callback) {
-  var categurl = metadata_domain+'/part-' + a + '/categories/' + category + ':' + sub_category + ':' + b + '.json'
+  var categurl = metadata_domain+'/part-' + a + '/master/categories/' + category + ':' + sub_category + ':' + b + '.json'
 
 
   $.getJSON(categurl, function(result) {
@@ -436,7 +436,7 @@ if (document.request['query'] != undefined) {
 
     // console.log('show some torrents')
 
-    $.getJSON(metadata_domain+'/part-0/categories.json', function(categories) {
+    $.getJSON(metadata_domain+'/part-0/master/categories.json', function(categories) {
       // console.log(categories)
       Object.keys(categories).forEach(function(each_category) {
         if (each_category.indexOf('porn') != 0 || safemode == false) {
@@ -516,7 +516,7 @@ function shuffle(array) {
 
 
 var add_results_to_div = function(each_category, each_sub_category) {
-  $.getJSON(metadata_domain+'/part-0/categories/' + each_category + ':' + each_sub_category + ':0.json', function(result) {
+  $.getJSON(metadata_domain+'/part-0/master/categories/' + each_category + ':' + each_sub_category + ':0.json', function(result) {
     // console.log(result)
     var div = '#subcateg' + each_category + each_sub_category
     result = shuffle(result)
@@ -537,7 +537,7 @@ document.seeders_count = []
 var content_types = { 'mp4': 'yellow', 'mkv': 'orange', 'mp3': 'blue', 'flac': 'blueish', 'm4a': 'blueish2', 'x265': 'x264', 'x264': 'x264', 'aac': 'aac' }
 var get_metadata = function(i, hash, addto, each_category) {
   // console.log('<get_metadata>', i, hash, addto)
-  $.getJSON(metadata_domain+'/' + i + '/metadata/' + hash + '.json', function(metadata) {
+  $.getJSON(metadata_domain+'/' + i + '/master/metadata/' + hash + '.json', function(metadata) {
     // console.log('metadata', metadata)
     if (metadata.categoryP.toLowerCase().indexOf('porn') == -1 || safemode == false) {
       $("#result-table").show()
