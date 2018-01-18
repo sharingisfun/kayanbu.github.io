@@ -160,7 +160,7 @@ document.findword = function(info, callback) {
     })
     .always(function() {
       callback(document.alldata)
-        // console.log("complete", 'https://part-' + info.page + '.metadata-cache.com/search/' + info.word + '.json');
+        // console.log("complete", metadata_domain+'/part-' + info.page + '/search/' + info.word + '.json');
     });
 
 }
@@ -270,7 +270,7 @@ var render_badge = function(type, color) {
 var result_count = 0
 document.hashtotal = 0
 var get_categ_data = function(a, b, category, sub_category, callback) {
-  var categurl = 'https://part-' + a + '.metadata-cache.com/categories/' + category + ':' + sub_category + ':' + b + '.json'
+  var categurl = metadata_domain+'/part-' + a + '/categories/' + category + ':' + sub_category + ':' + b + '.json'
 
 
   $.getJSON(categurl, function(result) {
@@ -516,7 +516,7 @@ function shuffle(array) {
 
 
 var add_results_to_div = function(each_category, each_sub_category) {
-  $.getJSON('https://part-0.metadata-cache.com/categories/' + each_category + ':' + each_sub_category + ':0.json', function(result) {
+  $.getJSON(metadata_domain+'/part-0/categories/' + each_category + ':' + each_sub_category + ':0.json', function(result) {
     // console.log(result)
     var div = '#subcateg' + each_category + each_sub_category
     result = shuffle(result)
@@ -537,7 +537,7 @@ document.seeders_count = []
 var content_types = { 'mp4': 'yellow', 'mkv': 'orange', 'mp3': 'blue', 'flac': 'blueish', 'm4a': 'blueish2', 'x265': 'x264', 'x264': 'x264', 'aac': 'aac' }
 var get_metadata = function(i, hash, addto, each_category) {
   // console.log('<get_metadata>', i, hash, addto)
-  $.getJSON('https://' + i + '.metadata-cache.com/metadata/' + hash + '.json', function(metadata) {
+  $.getJSON(metadata_domain+'/' + i + '/metadata/' + hash + '.json', function(metadata) {
     // console.log('metadata', metadata)
     if (metadata.categoryP.toLowerCase().indexOf('porn') == -1 || safemode == false) {
       $("#result-table").show()
