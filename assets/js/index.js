@@ -252,7 +252,7 @@ var render = function(metadata) {
   template = template.replace(/MAGNET/g, (metadata.magnet))
   if (metadata.torrent != undefined) {
     // console.log(metadata)
-    template = template.replace(/HASH/g, (metadata.torrent.infoHash))f
+    template = template.replace(/HASH/g, (metadata.torrent.infoHash))
   } else {
     template = template.replace(/HASH/g, (metadata.parsed.infoHash))
   }
