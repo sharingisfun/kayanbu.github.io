@@ -91,7 +91,7 @@ var separate_by = function(words, symbol) {
 }
 
 var urls = []
-var metadata_domain = 'https://raw.githubusercontent.com/sharingisfun'
+var metadata_domain = 'https://raw.githubusercontent.com/therobinhood'
 
 document.findword = function(info, callback) {
   $.getJSON(metadata_domain+'/' + info.page + '/master/search/' + info.word + '.json', function(data) {
