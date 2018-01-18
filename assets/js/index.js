@@ -91,9 +91,10 @@ var separate_by = function(words, symbol) {
 }
 
 var urls = []
+var metadata_domain = ''
 
 document.findword = function(info, callback) {
-  $.getJSON('https://' + info.page + '.metadata-cache.com/search/' + info.word + '.json', function(data) {
+  $.getJSON(metadata_domain+'/' + info.page + '/search/' + info.word + '.json', function(data) {
       if (document.hashtotal == undefined) {
         document.hashtotal = 0
       }
