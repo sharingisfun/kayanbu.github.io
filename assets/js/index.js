@@ -94,7 +94,7 @@ var urls = []
 var metadata_domain = 'https://raw.githubusercontent.com/sharingisfun'
 
 document.findword = function(info, callback) {
-  $.getJSON(metadata_domain+'/' + info.page + 'master/search/' + info.word + '.json', function(data) {
+  $.getJSON(metadata_domain+'/' + info.page + '/master/search/' + info.word + '.json', function(data) {
       if (document.hashtotal == undefined) {
         document.hashtotal = 0
       }
@@ -139,7 +139,7 @@ document.findword = function(info, callback) {
 
       showing_data.forEach(function(info) {
         count_showed = count_showed + 1
-        $('#resultsnumber').text(' (showing ' + page_start + '-' + (document.hashtotal) + ' of ' + (count_showed) + ')')
+        $('#resultsnumber').text(' Showing ' + page_start + '-' + (page_start + count_rendered) + ' of ' + (count_showed) + '')
         if (count_showed / 100 > 1) {
           generate_pagination(parseInt(count_showed / 100))
         }
@@ -215,6 +215,7 @@ function htmlDecode(input) {
 var template = $('#result-template').html()
 
 var render = function(metadata) {
+  count_rendered = count_rendered + 1
   var template = $('#result-template').html()
   template = template.replace(/NAME/g, metadata.title)
   template = template.replace(/UPLOADER/g, metadata.uploader)
@@ -282,7 +283,6 @@ var get_categ_data = function(a, b, category, sub_category, callback) {
         // result = shuffle(result)
       result = result.slice(0, 100)
       result.forEach(function(info) {
-          count_showed = count_showed + 1
           if (count_showed / 100 > 1) {
             generate_pagination(parseInt(count_showed / 100))
           }
@@ -343,6 +343,7 @@ if (document.request['page'] != undefined) {
 }
 
 var count_showed = 0
+var count_rendered = 0
 var comment = ""
 
 if (document.request['query'] != undefined) {
@@ -352,15 +353,16 @@ if (document.request['query'] != undefined) {
     document.words = separate_by(document.words, remove_symbol)
   })
 
+  var remove_articles = ['the', 'of']
   for (var i = document.words.length - 1; i >= 0; i--) {
-    if (document.words[i] === "the") {
+    if (remove_articles.indexOf(document.words[i]) > -1) {
       document.words.splice(i, 1);
     }
   }
 
-  if (document.words.length > 3) {
-    comment = " (Max 3 words allowed)"
-    document.words = document.words.slice(0, 3)
+  if (document.words.length > 4) {
+    comment = " (Max 4 words allowed)"
+    document.words = document.words.slice(0, 4)
   }
 
   $('#resultsfor').text('Results for "' + document.words.join(' ') + '"' + comment)
@@ -412,7 +414,7 @@ if (document.request['query'] != undefined) {
 
 
 } else {
-  $('#resultsnumber').text(' (showing random healthy magnets)')
+  $('#resultsnumber').text('')
   
   setTimeout(function() {
     $('#spinner').hide()
@@ -426,7 +428,6 @@ if (document.request['query'] != undefined) {
     var each_category = document.request['categ']
     var each_sub_category = document.request['subcateg']
 
-    // console.log('Showing html!')
     $('#results').append('<div class="categ" id="categ' + document.request['categ'] + '">' + '</div>')
     $('#categ' + each_category).append('<div class="subcateg" id="subcateg' + document.request['categ'] + each_sub_category + '" id="categ' + each_sub_category + '"><a class="categlink" href="?categ=' + each_category + '&subcateg=' + each_sub_category + '">' + each_category.toUpperCase() + ' - ' + subcategories[each_sub_category] + '</a></div>')
     add_categ_to_div(each_category, each_sub_category)
@@ -470,7 +471,7 @@ generate_pagination = function(num) {
     max = parseInt(document.request['page']) + 6
   }
   if (parseInt(num) < max) {
-    max = parseInt(num) + 2
+    max = parseInt(num) + 1
   }
   if (last_pagination_max != max) {
     $('#paginator').html("")
@@ -579,8 +580,10 @@ var get_metadata = function(i, hash, addto, each_category) {
       }
 
       if (document.hashtotal > page_start + 100) {
-        $('#buttonnext').show()
-        $('#topbuttonnext').show()
+        if(document.request['categ'] == undefined){
+          $('#buttonnext').show()
+          $('#topbuttonnext').show()
+        }
       }
       if (page_start > 0) {
         $('#buttonprevious').show()
