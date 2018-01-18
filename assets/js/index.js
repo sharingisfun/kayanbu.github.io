@@ -94,7 +94,7 @@ var urls = []
 var metadata_domain = 'https://raw.githubusercontent.com/sharingisfun'
 
 document.findword = function(info, callback) {
-  $.getJSON(metadata_domain+'/' + info.page + '/search/' + info.word + '.json', function(data) {
+  $.getJSON(metadata_domain+'/' + info.page + 'master/search/' + info.word + '.json', function(data) {
       if (document.hashtotal == undefined) {
         document.hashtotal = 0
       }
