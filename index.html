@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/index.css?version=0.2" />
-    <link href="https://fonts.googleapis.com/css?family=Ceviche+One|Lobster|Oxigen|Bungee|Exo|Rajdhani|Quicksand|Orbitron|Abel|Dosis|Open+Sans+Condensed:300|PT+Sans|PT+Sans+Narrow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ceviche+One|Lobster|Oxigen|Bungee|Exo|Rajdhani|Quicksand|Orbitron|Abel|Dosis|Open+Sans+Condensed:300|PT+Sans|PT+Sans+Narrow"
+        rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <link rel="shortcut icon" href="/assets/images/kopimi.ico" />
     <title>Welcome</title>
@@ -19,11 +20,24 @@
 
         <div class="container">
             <div class="col-sm-12 text-center margin-top-20 margin-bottom-20">
-                <a id="pagename" href="/" class="label label-title"></a> <a href="?categ=audio&subcateg=music" class="label label-primary">Music</a> <a href="?categ=video&subcateg=hd___movies" class="label label-primary">HD</a> <a href="?categ=video&subcateg=movies" class="label label-primary">Movies</a>                <a href="?categ=video&subcateg=tv_shows" class="label label-primary">tv</a> <a href="?categ=video&subcateg=3d" class="label label-primary">3D</a>
-                <a href="?categ=games&subcateg=pc" class="label label-success">PC</a> <a href="?categ=games&subcateg=psx" class="label label-success">PSX</a> <a href="?categ=games&subcateg=xbox360" class="label label-success">XBOX</a> <a href="?categ=games&subcateg=wii"
-                    class="label label-success">Wii</a> <a href="?categ=games&subcateg=android" class="label label-success">Android</a>
-                <a href="?categ=applications&subcateg=windows" class="label label-info">Windows</a> <a href="?categ=applications&subcateg=mac" class="label label-info">Mac</a> <a href="?categ=audio&subcateg=flac" class="label label-info">flac</a> <a href="?categ=other&subcateg=comics"
-                    class="label label-info">comics</a> <a href="?categ=other&subcateg=e_books" class="label label-info">e-books</a> <a id="porn1" href="?categ=porn&subcateg=movies" style="background-color: #e64141;display:none;" class="label label-info">porn</a>                <a id="safemode" onclick="switchSafeMode()" href="/" style="background-color: #adadad; font-size: 12px;" class="label label-info">Safe mode ON</a>
+                <a id="pagename" href="/" class="label label-title"></a>
+                <a href="?categ=audio&subcateg=music" class="label label-primary">Music</a>
+                <a href="?categ=video&subcateg=hd___movies" class="label label-primary">HD</a>
+                <a href="?categ=video&subcateg=movies" class="label label-primary">Movies</a>
+                <a href="?categ=video&subcateg=tv_shows" class="label label-primary">tv</a>
+                <a href="?categ=video&subcateg=3d" class="label label-primary">3D</a>
+                <a href="?categ=games&subcateg=pc" class="label label-success">PC</a>
+                <a href="?categ=games&subcateg=psx" class="label label-success">PSX</a>
+                <a href="?categ=games&subcateg=xbox360" class="label label-success">XBOX</a>
+                <a href="?categ=games&subcateg=wii" class="label label-success">Wii</a>
+                <a href="?categ=games&subcateg=android" class="label label-success">Android</a>
+                <a href="?categ=applications&subcateg=windows" class="label label-info">Windows</a>
+                <a href="?categ=applications&subcateg=mac" class="label label-info">Mac</a>
+                <a href="?categ=audio&subcateg=flac" class="label label-info">flac</a>
+                <a href="?categ=other&subcateg=comics" class="label label-info">comics</a>
+                <a href="?categ=other&subcateg=e_books" class="label label-info">e-books</a>
+                <a id="porn1" href="?categ=porn&subcateg=movies" style="background-color: #e64141;display:none;" class="label label-info">porn</a>
+                <a id="safemode" onclick="switchSafeMode()" href="/" style="background-color: #adadad; font-size: 12px;" class="label label-info">Safe mode ON</a>
             </div>
         </div>
         <div class="container">
@@ -37,10 +51,11 @@
         <div class="container">
             <form method="GET" action="/">
                 <div class="input-group">
-                    <input style="font-size: 20px;" id="maininput" type="text" name="query" class="form-control m-b" placeholder="Search for..." value="">
+                    <input style="font-size: 20px;" id="maininput" type="text" name="query" class="form-control m-b" placeholder="Search for..."
+                        value="">
                     <span class="input-group-btn">
-                <button type="submit" class="btn btn-default m-b" type="button">Search</button>
-            </span>
+                        <button type="submit" class="btn btn-default m-b" type="button">Search</button>
+                    </span>
                 </div>
             </form>
         </div>
@@ -48,8 +63,10 @@
         <div class="container margin-top-20 margin-bottom-20">
             <div class="row">
                 <div class="col-sm-12 text-center" style="font-size: 90%;">
-                    <b> <a href="https://twitter.com/torrent_tips">@torrent_tips</a>:
-                    <div style="display: inline;" id="tips"></div></b>
+                    <b>
+                        <a href="https://twitter.com/torrent_tips">@torrent_tips</a>:
+                        <div style="display: inline;" id="tips"></div>
+                    </b>
 
                 </div>
             </div>
@@ -58,8 +75,13 @@
             <div id="maincontainer" class="container">
                 <div id="alert"></div>
                 <h3>
+                    <p>
+                        <i id="spinner" class="fa fa-spinner fa-pulse fa-1x fa-fw"></i>
+                        <span id="resultsnumber" class="small"></span>
+                    </p>
                     <p id="resultsfor">
-                        <p> <i id="spinner" class="fa fa-spinner fa-pulse fa-1x fa-fw"></i> <span id="resultsnumber" class="small"></span> </h3>
+                    </p>
+                </h3>
                 <div id="result-table" style="display: none;">
                     <div class="row">
                         <div class="col-xs-6 col-sm-3">
@@ -67,8 +89,6 @@
                         </div>
                         <div id="toppaginator" class="hidden-xs col-sm-6 ">
                         </div>
-
-                        <!--<div class="col-xs-6 col-sm-offset-6 col-sm-3 margin-bottom-50">-->
                         <div class="col-xs-6 col-sm-3 margin-bottom-50">
                             <a id="topbuttonnext" style="display:none;" href="#" onclick="pagenext()" class="btn btn-primary btn-block btn-sm">Next</a>
                         </div>
@@ -99,19 +119,21 @@
                             <div class="row">
                                 <div id="lineHASH" class="col-sm-8 col-md-9 col-lg-10">
                                     <a style="font-size:17px; font-family: 'Abel', sans-serif;" href="magnet:MAGNET">NAME</a>
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseHASH" aria-controls="collapseHASH"><span class="fa fa-chevron-down"></span></a>
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseHASH" aria-controls="collapseHASH">
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
                                     <p style="display: inline; font-size:13px; font-family: 'Abel', sans-serif;" href="">UPLOADER</p>
                                 </div>
                                 <div class="col-sm-4 col-md-3 col-lg-2">
                                     <div class="row">
                                         <div class="col-xs-6 text-right">
                                             <span class="btn btn-xs btn-noclick font12">
-                                                            SIZEMB
-                                                        </span>
+                                                SIZEMB
+                                            </span>
                                         </div>
                                         <div class="col-xs-6 text-right">
                                             <span class="btn btn-xs btn-noclick font17">
-                                                        <span style="display:none;" class="fa fa-UPDOWN margin5right"></span>PEERS
+                                                <span style="display:none;" class="fa fa-UPDOWN margin5right"></span>PEERS
                                             </span>
                                         </div>
                                     </div>
@@ -148,38 +170,48 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-5">
-                            <a href="https://github.com/kayanbu/kayanbu.github.io/issues/new?title=DMCA Communication&body=Detailed Information" onclick="pageback()" class="btn btn-block btn-sm">DMCA</a>
+                            <a href="https://github.com/kayanbu/kayanbu.github.io/issues/new?title=DMCA Communication&body=Detailed Information" onclick="pageback()"
+                                class="btn btn-block btn-sm">DMCA</a>
                         </div>
                         <div class="col-xs-1">
-                            <a href="http://www.kopimi.com/kopimi/" class="btn btn-block btn-sm"><img style="height: 40px;" src="assets/images/kopimi.png"></a>
+                            <a href="http://www.kopimi.com/kopimi/" class="btn btn-block btn-sm">
+                                <img style="height: 40px;" src="assets/images/kopimi.png">
+                            </a>
                         </div>
 
                         <div class="col-xs-1">
                             <a href="https://github.com/kayanbu/kayanbu.github.io">
-                            <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="50" height="50" viewBox="0 0 50.000001 49.999999" id="svg2" version="1.1" inkscape:version="0.91 r13725" sodipodi:docname="github.svg">
-  <defs id="defs4">
-    <clipPath id="clipPath4171" clipPathUnits="userSpaceOnUse">
-      <path inkscape:connector-curvature="0" id="path4173" d="m 0,551.986 530.973,0 L 530.973,0 0,0 0,551.986 Z"></path>
-    </clipPath>
-  </defs>
-  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="1.4" inkscape:cx="91.334407" inkscape:cy="126.32399" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="1920" inkscape:window-height="1103" inkscape:window-x="0" inkscape:window-y="1" inkscape:window-maximized="1" units="px"></sodipodi:namedview>
-  <metadata id="metadata7">
-    <rdf:rdf>
-      <cc:work rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>
-        <dc:title></dc:title>
-      </cc:work>
-    </rdf:rdf>
-  </metadata>
-  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-1002.3622)">
-    <g id="g4175" transform="matrix(1.25,0,0,-1.25,24.616546,1006.3204)" style="fill:#cccccc">
-      <path d="m 0,0 c -8.995,0 -16.288,-7.293 -16.288,-16.29 0,-7.197 4.667,-13.302 11.14,-15.457 0.815,-0.149 1.112,0.354 1.112,0.786 0,0.386 -0.014,1.411 -0.022,2.77 -4.531,-0.984 -5.487,2.184 -5.487,2.184 -0.741,1.881 -1.809,2.382 -1.809,2.382 -1.479,1.011 0.112,0.991 0.112,0.991 1.635,-0.116 2.495,-1.679 2.495,-1.679 1.453,-2.489 3.813,-1.77 4.741,-1.354 0.148,1.053 0.568,1.771 1.034,2.178 -3.617,0.411 -7.42,1.809 -7.42,8.051 0,1.778 0.635,3.232 1.677,4.371 -0.168,0.412 -0.727,2.068 0.159,4.311 0,0 1.368,0.438 4.48,-1.67 1.299,0.361 2.693,0.542 4.078,0.548 1.383,-0.006 2.777,-0.187 4.078,-0.548 3.11,2.108 4.475,1.67 4.475,1.67 0.889,-2.243 0.33,-3.899 0.162,-4.311 1.044,-1.139 1.675,-2.593 1.675,-4.371 0,-6.258 -3.809,-7.635 -7.438,-8.038 0.585,-0.503 1.106,-1.497 1.106,-3.017 0,-2.177 -0.02,-3.934 -0.02,-4.468 0,-0.436 0.293,-0.943 1.12,-0.784 6.468,2.159 11.131,8.26 11.131,15.455 C 16.291,-7.293 8.997,0 0,0" style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none" id="path4177" inkscape:connector-curvature="0"></path>
-    </g>
-  </g>
-</svg>
-</a>
+                                <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                                    xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                                    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="50" height="50" viewBox="0 0 50.000001 49.999999"
+                                    id="svg2" version="1.1" inkscape:version="0.91 r13725" sodipodi:docname="github.svg">
+                                    <defs id="defs4">
+                                        <clipPath id="clipPath4171" clipPathUnits="userSpaceOnUse">
+                                            <path inkscape:connector-curvature="0" id="path4173" d="m 0,551.986 530.973,0 L 530.973,0 0,0 0,551.986 Z"></path>
+                                        </clipPath>
+                                    </defs>
+                                    <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2"
+                                        inkscape:zoom="1.4" inkscape:cx="91.334407" inkscape:cy="126.32399" inkscape:document-units="px"
+                                        inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="1920" inkscape:window-height="1103"
+                                        inkscape:window-x="0" inkscape:window-y="1" inkscape:window-maximized="1" units="px"></sodipodi:namedview>
+                                    <metadata id="metadata7">
+                                        <rdf:rdf>
+                                            <cc:work rdf:about="">
+                                                <dc:format>image/svg+xml</dc:format>
+                                                <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>
+                                                <dc:title></dc:title>
+                                            </cc:work>
+                                        </rdf:rdf>
+                                    </metadata>
+                                    <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-1002.3622)">
+                                        <g id="g4175" transform="matrix(1.25,0,0,-1.25,24.616546,1006.3204)" style="fill:#cccccc">
+                                            <path d="m 0,0 c -8.995,0 -16.288,-7.293 -16.288,-16.29 0,-7.197 4.667,-13.302 11.14,-15.457 0.815,-0.149 1.112,0.354 1.112,0.786 0,0.386 -0.014,1.411 -0.022,2.77 -4.531,-0.984 -5.487,2.184 -5.487,2.184 -0.741,1.881 -1.809,2.382 -1.809,2.382 -1.479,1.011 0.112,0.991 0.112,0.991 1.635,-0.116 2.495,-1.679 2.495,-1.679 1.453,-2.489 3.813,-1.77 4.741,-1.354 0.148,1.053 0.568,1.771 1.034,2.178 -3.617,0.411 -7.42,1.809 -7.42,8.051 0,1.778 0.635,3.232 1.677,4.371 -0.168,0.412 -0.727,2.068 0.159,4.311 0,0 1.368,0.438 4.48,-1.67 1.299,0.361 2.693,0.542 4.078,0.548 1.383,-0.006 2.777,-0.187 4.078,-0.548 3.11,2.108 4.475,1.67 4.475,1.67 0.889,-2.243 0.33,-3.899 0.162,-4.311 1.044,-1.139 1.675,-2.593 1.675,-4.371 0,-6.258 -3.809,-7.635 -7.438,-8.038 0.585,-0.503 1.106,-1.497 1.106,-3.017 0,-2.177 -0.02,-3.934 -0.02,-4.468 0,-0.436 0.293,-0.943 1.12,-0.784 6.468,2.159 11.131,8.26 11.131,15.455 C 16.291,-7.293 8.997,0 0,0"
+                                                style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none" id="path4177"
+                                                inkscape:connector-curvature="0"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
                         </div>
                         <div class="col-xs-5">
                             <a href="https://github.com/kayanbu/kayanbu.github.io/issues/new?title=Submit Magnet" onclick="pageback()" class="btn btn-block btn-sm">Submit a magnet link</a>
@@ -221,9 +253,9 @@
             }
         </script>
         <script>
-            (function(i, s, o, g, r, a, m) {
+            (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
+                i[r] = i[r] || function () {
                     (i[r].q = i[r].q || []).push(arguments)
                 }, i[r].l = 1 * new Date();
                 a = s.createElement(o),
