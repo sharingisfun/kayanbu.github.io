@@ -436,7 +436,7 @@ if (document.request['query'] != undefined) {
 
     // console.log('show some torrents')
 
-    $.getJSON('https://part-0.metadata-cache.com/categories.json', function(categories) {
+    $.getJSON(metadata_domain+'/part-0/categories.json', function(categories) {
       // console.log(categories)
       Object.keys(categories).forEach(function(each_category) {
         if (each_category.indexOf('porn') != 0 || safemode == false) {
